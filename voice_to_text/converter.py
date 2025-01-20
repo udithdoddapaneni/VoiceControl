@@ -37,10 +37,11 @@ def callback(indata, frames, time, status):
         print("stopping recording")
         STREAM.stop()
         transcribe(np.concatenate(RECORDED_DATA, axis=0).flatten())
+        RECORDED_DATA = []
         RECORDING = False
 
 def on_press(key):
-    global RECORDING, STREAM, START_TIME
+    global RECORDING, STREAM, START_TIME, RECORDED_DATA
     if key == keyboard.Key.space:
         if not RECORDING:
             print("recording")
@@ -58,6 +59,7 @@ def on_press(key):
             STREAM.stop()
             START_TIME = -1
             transcribe(np.concatenate(RECORDED_DATA, axis=0).flatten())
+            RECORDED_DATA = []
             RECORDING = False
 
 def recorder():

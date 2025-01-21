@@ -1,6 +1,6 @@
-# to run this file, run the following command in the terminal(make sure you are at /VoiceControl>)
-# python -m application_control.browser
-
+''' to run this file, run the following command in the terminal(make sure you are at /VoiceControl>)
+python -m application_control.browser
+'''
 from playwright.sync_api import sync_playwright
 import time
 

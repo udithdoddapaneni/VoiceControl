@@ -13,3 +13,5 @@ To test browser_part
 '''
 python -m application_control.browser
 '''
+
+sudo apt install espeak libespeak1 ffmpeg

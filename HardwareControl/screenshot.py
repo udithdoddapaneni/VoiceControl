@@ -1,14 +1,16 @@
 import pyautogui
 from datetime import datetime
 
-# Generate a timestamp for the filename
-timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-filename = f"{timestamp}.png"
 
-# Take a screenshot
-screenshot = pyautogui.screenshot()
+def screenshot():
+    # Generate a timestamp for the filename
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    filename = f"{timestamp}.png"
 
-# Save the screenshot
-screenshot.save(filename)
+    # Take a screenshot
+    screenshot = pyautogui.screenshot()
 
-print(f"Screenshot saved as {filename}")
+    # Save the screenshot
+    screenshot.save(filename)
+
+    print(f"Screenshot saved as {filename}")

@@ -46,3 +46,4 @@ pyttsx3
 pillow
 pyautogui
 pyscreenshot
+psutil

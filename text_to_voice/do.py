@@ -1,5 +1,5 @@
 import pyttsx3
-def speak(text,voice=1,volume=1,speed=10):
+def speak(text,voice=3,volume=1,speed=0):
     """Function to speak out text using pyttsx3 with customized voice.
     voice = 1 for female voice,
     voice = 0 for male  voice.

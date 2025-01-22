@@ -8,11 +8,14 @@ import time
 from text_to_voice.do import speak
 
 browser_path=r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-def open_browser_and_search(query):
+def open_browser_and_search(query,system='linux'):
     """Opens a browser, searches for the given query, and displays results."""
     with sync_playwright() as p:
         # Launch the browser
-        browser = p.chromium.launch(executable_path=browser_path, headless=False)  # Set headless=True to run without GUI
+        if system=='linux':
+            browser = p.firefox.launch(headless=False)
+        else:
+            browser = p.chromium.launch(executable_path=browser_path, headless=False)  # Set headless=True to run without GUI
         context = browser.new_context()
         page = context.new_page()
         speak("Opening Browser")

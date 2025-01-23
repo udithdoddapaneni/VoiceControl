@@ -19,6 +19,8 @@ def open_browser_and_search(query,system='linux'):
         context = browser.new_context()
         page = context.new_page()
         speak("Opening Browser")
+        page.goto("https://www.bing.com")
+        time.sleep(0.5)
         # Construct the search URL
         search_url = f"https://www.bing.com/search?q={query}"
         
@@ -36,8 +38,8 @@ def open_browser_and_search(query,system='linux'):
         
 
         # Wait for user to close the browser
-        speak("Press Enter to close the browser.")
-        input("Press Enter to close the browser...")
+        speak("Press Enter in the terminal to close the browser.")
+        input("Press Enter in the terminal to close the browser...")
         browser.close()
 
 

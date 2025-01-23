@@ -15,3 +15,6 @@ python -m application_control.browser
 '''
 
 sudo apt install espeak libespeak1 ffmpeg
+sudo apt install gnome-screenshot
+
+## Also make sure you have a good microphone

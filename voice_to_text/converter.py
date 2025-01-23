@@ -36,18 +36,23 @@ COMMANDS = [
     ("disk info", HARDWARE.get_disk),
     ("cpu usage", HARDWARE.get_cpu_usage),
     ("cpu info", HARDWARE.get_cpu_info),
-    ("get system info", HARDWARE.get_all)
+    ("system info", HARDWARE.get_all)
 ]
 
 def commands(transcription: str):
+    command_executed = False
     for cmd, fn in COMMANDS:
         if cmd in transcription:
             if cmd == "search for":
                 query = " ".join(transcription.split("search for")[1:])
                 if query != "":
                     fn(query)
+                    command_executed = True
             else:
                 fn()
+                command_executed = True
+    if not command_executed:
+        speak("no command executed")
 
 def transcribe(recording):
     print("shape of the recording", recording.shape)

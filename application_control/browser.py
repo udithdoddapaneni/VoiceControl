@@ -42,6 +42,21 @@ def open_browser_and_search(query,system='linux'):
         input("Press Enter in the terminal to close the browser...")
         browser.close()
 
+def open_browser(system='linux'):
+    """Opens a browser with bing as default search engine"""
+    with sync_playwright() as p:
+        # Launch the browser
+        if system=='linux':
+            browser = p.firefox.launch(headless=False)
+        else:
+            browser = p.chromium.launch(executable_path=browser_path, headless=False)  # Set headless=True to run without GUI
+        context = browser.new_context()
+        page = context.new_page()
+        speak("Opening Browser")
+        page.goto("https://www.bing.com")
+        speak("Press Enter in the terminal to close the browser.")
+        input("Press Enter in the terminal to close the browser...")
+        browser.close()
 
 # def close_browser():
 #     """Example function to manage closing browser context."""

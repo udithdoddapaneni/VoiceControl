@@ -10,7 +10,7 @@ from torch import cuda
 from queue import Queue
 
 from text_to_voice.do import speak
-from application_control.browser import open_browser_and_search
+from application_control.browser import open_browser_and_search, open_browser
 from HardwareControl.camera import open_camera
 from HardwareControl.hardware import Hardware
 from HardwareControl.screenshot import screenshot
@@ -29,28 +29,50 @@ except:
 START_TIME = -1
 
 COMMANDS = [
-    ("search for", open_browser_and_search),
-    ("open camera", open_camera),
-    ("screenshot", screenshot),
-    ("ram info", HARDWARE.get_ram),
-    ("disk info", HARDWARE.get_disk),
-    ("cpu usage", HARDWARE.get_cpu_usage),
-    ("cpu info", HARDWARE.get_cpu_info),
-    ("system info", HARDWARE.get_all)
+    (["search for", "search", "bing"], open_browser_and_search),
+    (["open browser"], open_browser),
+    (["open camera"], open_camera),
+    (["take screenshot", "take a screenshot"], screenshot),
+    (["show ram info", "get ram info", "show ram usage", "get ram usage"], HARDWARE.get_ram),
+    (["show disk info", "get disk info", "show disk usage", "get disk usage"], HARDWARE.get_disk),
+    (["show cpu usage", "get cpu usage"], HARDWARE.get_cpu_usage),
+    (["show cpu info", "get cpu info"], HARDWARE.get_cpu_info),
+    (["show system info", "get system info", "show hardware info", "get hardware info"], HARDWARE.get_all)
 ]
 
 def commands(transcription: str):
     command_executed = False
-    for cmd, fn in COMMANDS:
-        if cmd in transcription:
-            if cmd == "search for":
-                query = " ".join(transcription.split("search for")[1:])
-                if query != "":
-                    fn(query)
-                    command_executed = True
-            else:
-                fn()
-                command_executed = True
+    try:
+        for cmds, fn in COMMANDS:
+            for cmd in cmds:
+                if cmd in transcription:
+                    if cmd == "search for":
+                        query = " ".join(transcription.split("search for")[1:])
+                        if query != "":
+                            fn(query)
+                            command_executed = True
+                        break
+                    elif cmd == "search":
+                        query = " ".join(transcription.split("search")[1:])
+                        if query != "":
+                            fn(query)
+                            command_executed = True
+                        break
+                    elif cmd == "bing":
+                        query = " ".join(transcription.split("bing")[1:])
+                        if query != "":
+                            fn(query)
+                            command_executed = True
+                        break
+                    else:
+                        fn()
+                        command_executed = True
+                        break
+            if command_executed:
+                break
+    except:
+        print("some unexpected error occured")
+        speak("some unexpected error occured")
     if not command_executed:
         speak("no command executed")
 
@@ -101,12 +123,12 @@ def on_press(key):
                 dtype=np.float32,
                 callback=callback
             )
-            STREAM.start()
             speak("started recording")
+            STREAM.start()
         else:
             print("stopping recording")
-            speak("stopped recording")
             STREAM.stop()
+            speak("stopped recording")
             START_TIME = -1
             transcribe(np.concatenate(RECORDED_DATA, axis=0).flatten())
             RECORDED_DATA = []

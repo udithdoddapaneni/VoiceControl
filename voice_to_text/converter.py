@@ -136,6 +136,8 @@ def on_press(key):
 
 def recorder():
     print("start")
+    print("the program has started. You can press spacebar to start recording and press spacebar again to stop it. In order to close the program press escape button")
+    speak("the program has started. You can press spacebar to start recording and press spacebar again to stop it. In order to close the program press escape button")
     with keyboard.Listener(on_press=on_press) as listener:
         listener.join()
 

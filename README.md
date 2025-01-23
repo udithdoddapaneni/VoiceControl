@@ -44,3 +44,8 @@ sudo apt install espeak libespeak1 ffmpeg
 sudo apt install gnome-screenshot
 sudo apt-get install portaudio19-dev python-all-dev
 ## Also make sure you have a good microphone
+
+## Team members:
+- 142201012: Doddapaneni Udith
+- 142201014: Vishnu Shreeram
+- 142201026: Dhruvadeep

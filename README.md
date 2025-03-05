@@ -1,3 +1,5 @@
+## NOTE: This is just proof of concept.
+
 ## How to run:
 
 - In terminal navigate to the current directory
@@ -51,3 +53,4 @@ sudo apt-get install portaudio19-dev python-all-dev
 - 142201026: Dhruvadeep
 
 ## Link for demo: https://drive.google.com/drive/folders/1qiPbUMA_2uULneZozGfOD2jGz2QPm6Gl?usp=sharing
+## Final project repository: https://github.com/dhruvadeep/VoiceControl
